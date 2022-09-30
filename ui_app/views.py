@@ -12,11 +12,16 @@ class RestaurantsView(View):
         # print('blablabla', request.data)
         url_restaurant = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
         code = url_restaurant.status_code
+        # print(f'c: {code}')
         if code == 200:
-            print(url_restaurant.status_code)
+            print(f'c: {url_restaurant.status_code}')
             # print('blablabla', request.data)
             arr1 = []
-            for i in loads(url_restaurant.text):
+            loads_restaurant = loads(url_restaurant.text)
+            lr_results = loads_restaurant['results']
+
+            print(f'lrr: {lr_results}')
+            for i in lr_results:
                 arr1.append((i['name'], i['city']))
             print(arr1[0][0])
             ctx = {
