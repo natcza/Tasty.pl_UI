@@ -10,9 +10,14 @@ from Dashboard.settings import SERVER_DEVELOPMENT
 class RestaurantsView(View):
     def get(self, request):
         # print('blablabla', request.data)
-        url_restaurant = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
+        try:
+            url_restaurant = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
+        except requests.ConnectionError:
+            # https://stackoverflow.com/questions/9054820/python-requests-exception-handling
+            raise Http404("API is not responding")
+
         code = url_restaurant.status_code
-        # print(f'c: {code}')
+        print(f'c: {code}')
         if code == 200:
             print(f'c: {url_restaurant.status_code}')
             # print('blablabla', request.data)
