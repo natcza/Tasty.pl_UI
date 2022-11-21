@@ -125,4 +125,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SERVER_DEVELOPMENT = 'http://127.0.0.1:8001'
+SERVER_DEVELOPMENT = 'http://127.0.0.1:8000'

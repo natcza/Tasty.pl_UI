@@ -8,12 +8,12 @@ from Dashboard.settings import SERVER_DEVELOPMENT
 
 class RestaurantsView(View):
     def get(self, request):
-        print('blablabla', request.data)
-        url_restaurant = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
-        # print('blablabla', request.data)
+        restaurants = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
         arr1 = []
-        for i in loads(url_restaurant.text):
-            arr1.append((i['name'], i['city']))
+        res_1 = loads(restaurants.text)
+        print(res_1["results"][0])
+        for i in res_1["results"]:
+            arr1.append((i['name'], i['city'], i["street"], i['house_number'], i['phone_number']))
         print(arr1[0][0])
         ctx = {
             'restaurants': arr1,
