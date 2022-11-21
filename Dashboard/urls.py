@@ -20,5 +20,5 @@ from ui_app.views import RestaurantsView, RestaurantDetailView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', RestaurantsView.as_view(), name="restaurants"),
-    # path('restaurant/<int:pk>/', RestaurantDetailView.as_view(), name="restaurant-detail"),
+    path('restaurant/<int:pk>/', RestaurantDetailView.as_view(), name="restaurant-detail"),
 ]

@@ -9,33 +9,17 @@ from Dashboard.settings import SERVER_DEVELOPMENT
 
 class RestaurantsView(View):
     def get(self, request):
-        # print('blablabla', request.data)
-        try:
-            url_restaurant = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
-        except requests.ConnectionError:
-            # https://stackoverflow.com/questions/9054820/python-requests-exception-handling
-            raise Http404("API is not responding")
-
-        code = url_restaurant.status_code
-        print(f'c: {code}')
-        if code == 200:
-            print(f'c: {url_restaurant.status_code}')
-            # print('blablabla', request.data)
-            arr1 = []
-            loads_restaurant = loads(url_restaurant.text)
-            lr_results = loads_restaurant['results']
-
-            print(f'lrr: {lr_results}')
-            for i in lr_results:
-                arr1.append((i['name'], i['city']))
-            print(arr1[0][0])
-            ctx = {
-                'restaurants': arr1,
-            }
-            return render(request, 'base.html', ctx)
-        elif code == 404:
-            raise Http404("No MyModel matches the given query.")
-
+        restaurants = requests.get(SERVER_DEVELOPMENT + '/restaurants/')
+        arr1 = []
+        res_1 = loads(restaurants.text)
+        print(res_1["results"][0])
+        for i in res_1["results"]:
+            arr1.append((i['name'], i['city'], i["street"], i['house_number'], i['phone_number']))
+        print(arr1[0][0])
+        ctx = {
+            'restaurants': arr1,
+        }
+        return render(request, 'base.html', ctx)
 
 class RestaurantDetailView(View):
     def get(self, request, restaurant_id):
