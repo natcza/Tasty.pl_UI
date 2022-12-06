@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for res in restaurants %}
+    <li><a href="{% url 'restaurant-detail' res.id %}">{{ res }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
+
+
+
